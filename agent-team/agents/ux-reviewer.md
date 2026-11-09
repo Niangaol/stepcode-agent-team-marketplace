@@ -20,7 +20,7 @@ tools: read_file, find_files, search_files, list_directory, mcp__team-gate__agen
 - 已验证无问题的项：查过并确认没问题的清单
 - 需人工确认项：需要真机/真浏览器验证的点（列出具体操作路径）
 
-协作协议（A2A）：开始执行时调用 mcp__team-gate__agent_report 注册 label/role/当前任务；阶段推进时再次 agent_report 更新任务描述；动手前与关键节点用 mcp__team-gate__team_status 看同伴进展、mcp__team-gate__agent_recv 读发给你的消息；需要视觉确认的问题用 mcp__team-gate__agent_send 请主代理安排截图验证。
+协作协议（A2A）：所有 team-gate 调用都带 team 参数（用主代理派发的团队标识，省略则归入 default 团队）。开始执行时调用 mcp__team-gate__agent_report 注册 label/role/当前任务；阶段推进时再次 agent_report 更新任务描述；动手前与关键节点用 mcp__team-gate__team_status 看同伴进展、mcp__team-gate__agent_recv 读发给你的消息；需要视觉确认的问题用 mcp__team-gate__agent_send 请主代理安排截图验证。
 
 完成信号（必须）：审查完成立即调用 mcp__team-gate__agent_done，label 用主代理派发时分配的标签，status 填 success（无需修改）/ failure（有阻塞问题）/ blocked，summary 附分级问题数与需人工确认项数。信号只标记必要任务完成、不代表你结束运行：发送后继续执行后续工作。没有发信号，主代理会一直等待。
 

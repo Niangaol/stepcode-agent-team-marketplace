@@ -2,7 +2,7 @@
 description: 发布把关流程：功能/安全/性能/UI 四路并行审查 → 文档同步 → 交付检查与回滚方案
 ---
 
-对当前工作区改动执行发布前把关。
+对当前工作区改动执行发布前把关。为本次把关分配团队名（如 ship-1），所有派发都带该 team。
 
 第一步，parallel 并行派发四路审查，各自只读，分配 label：
 - **reviewer**（label: ship-func）：正确性、回归、约定违反。
@@ -10,7 +10,7 @@ description: 发布把关流程：功能/安全/性能/UI 四路并行审查 →
 - **perf-engineer**（label: ship-perf）：热路径、复杂度、IO，输出测量数字。
 - **ux-reviewer**（label: ship-ui）：状态覆盖、交互反馈、文案、可访问性；需视觉确认的点列出来。
 
-派发后调用 mcp__team-gate__team_wait（expect 为四个 label）主动暂停，收齐信号后合并：按 [阻塞]/[高危] 优先排序，给出「可以发布 / 需修改后发布」结论。
+派发后调用 mcp__team-gate__team_wait（team: ship-1，expect 为四个 label）主动暂停，收齐信号后合并：按 [阻塞]/[高危] 优先排序，给出「可以发布 / 需修改后发布」结论。
 
 第二步（仅无阻塞项时继续）：
 - **docs-writer**（label: ship-docs）：按代码事实同步 README/API/CHANGELOG。

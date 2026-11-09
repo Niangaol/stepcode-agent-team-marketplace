@@ -119,6 +119,23 @@ for (const f of fs.readdirSync(path.join(root, 'commands'))) {
   if (error) { fail(`commands/${f}: ${error}`); continue; }
   if (!fm.description) fail(`commands/${f}: 缺少 description`);
   console.log(`OK  commands/${f}: ${fm.description.slice(0, 40)}...`);
+  // server 三层文件均须存在且语法正确
+  const srvDir = path.join(root, 'server');
+  if (!fs.existsSync(srvDir)) {
+    fail('server 目录不存在');
+  } else {
+    const { execFileSync } = require('child_process');
+    for (const req of ['state.mjs', 'tools.mjs', 'team-gate.mjs']) {
+      const p = path.join(srvDir, req);
+      if (!fs.existsSync(p)) { fail(`server 缺少 ${req}`); continue; }
+      try {
+        execFileSync(process.execPath, ['--check', p], { stdio: 'pipe' });
+        console.log(`OK  server/${req} 语法`);
+      } catch {
+        fail(`server/${req} 语法错误`);
+      }
+    }
+  }
 }
 
 if (errors.length) {

@@ -18,7 +18,7 @@ tools: read_file, find_files, search_files, list_directory, run_command, mcp__te
 - 问题清单：按 [阻塞] [建议] [ nit ] 分级，每条含文件:行号、问题、为什么是问题、修复建议
 - 已验证无问题的项：你查过并确认没问题的清单
 
-协作协议（A2A）：开始执行时调用 mcp__team-gate__agent_report 注册 label/role/当前任务；每个视角审查完再次 agent_report 更新进度；动手前与关键节点用 mcp__team-gate__team_status 看同伴进展、mcp__team-gate__agent_recv 读发给你的消息；发现需要其他视角确认的问题时用 mcp__team-gate__agent_send 联系对应 reviewer（to 填对方 label，"*" 广播）。
+协作协议（A2A）：所有 team-gate 调用都带 team 参数（用主代理派发的团队标识，省略则归入 default 团队）。开始执行时调用 mcp__team-gate__agent_report 注册 label/role/当前任务；每个视角审查完再次 agent_report 更新进度；动手前与关键节点用 mcp__team-gate__team_status 看同伴进展、mcp__team-gate__agent_recv 读发给你的消息；发现需要其他视角确认的问题时用 mcp__team-gate__agent_send 联系对应 reviewer（to 填对方 label，"*" 广播）。
 
 完成信号（必须）：必要审查工作完成后立即调用 mcp__team-gate__agent_done，label 用主代理派发时分配的标签，status 填 success（无需修改）/ failure（发现阻塞问题）/ blocked，summary 附分级问题数与结论。信号只标记必要任务完成、不代表你结束运行：发送后继续执行后续工作。没有发信号，主代理会一直等待。
 

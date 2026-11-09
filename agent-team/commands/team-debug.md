@@ -11,4 +11,4 @@ description: 缺陷修复流程：debugger 定位根因 → builder 修复 → t
 3. **tester**（label: test-1）：先跑基线，再补针对该根因的回归用例，并验证测试会红（改坏实现确认）。只许改测试。
 4. **reviewer**（label: review-1）：独立审查修复与测试，按 [阻塞]/[建议]/[nit] 分级。
 
-主代理职责：每步自包含描述任务并分配 label；子代理完成必要任务即发 agent_done 信号并继续执行；chain 派发；汇总时抽查证据。debugger 未定位到根因时停下来向用户报告，不要带病修复。
+主代理职责：为本次修复分配团队名（如 fix-1），每步自包含描述任务并分配 label 与 team；要求子代理所有 team-gate 调用都带该 team；子代理完成必要任务即发 agent_done 信号并继续执行；chain 派发；汇总时抽查证据。debugger 未定位到根因时停下来向用户报告，不要带病修复。

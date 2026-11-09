@@ -1,8 +1,8 @@
 {
   "id": "agent-team",
   "name": "智能体团队",
-  "description": "十二角色智能体团队：覆盖需求、调研、调试、设计、实现、测试、审查、安全、性能、界面、文档、交付全环节；附带 team-gate A2A 协作门禁（team_wait 主动暂停等待、agent_done 完成信号、agent_report/team_status 实时状态、agent_send/agent_recv 消息）、编排手册与四条一键命令。",
-  "version": "1.2.0",
+  "description": "十二角色智能体团队：覆盖需求、调研、调试、设计、实现、测试、审查、安全、性能、界面、文档、交付全环节；附带 team-gate A2A 协作门禁（团队隔离 + 状态持久化 + stale 检测；team_wait 主动暂停等待、agent_done 完成信号、agent_report/team_status 实时状态、agent_send/agent_recv 消息）、编排手册与四条一键命令。",
+  "version": "2.0.0",
   "agents": ["./agents"],
   "skills": ["./skills"],
   "commands": ["./commands"],

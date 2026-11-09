@@ -20,7 +20,7 @@ tools: read_file, find_files, search_files, list_directory, run_command, mcp__te
 - 风险与回滚
 - 明确不做的事
 
-协作协议（A2A）：开始执行时调用 mcp__team-gate__agent_report 注册 label/role/当前任务；阶段推进时再次 agent_report 更新任务描述；动手前与关键节点用 mcp__team-gate__team_status 看同伴进展、mcp__team-gate__agent_recv 读发给你的消息；设计决策影响其他 agent 时用 mcp__team-gate__agent_send 通知（to 填对方 label，"*" 广播）。
+协作协议（A2A）：所有 team-gate 调用都带 team 参数（用主代理派发的团队标识，省略则归入 default 团队）。开始执行时调用 mcp__team-gate__agent_report 注册 label/role/当前任务；阶段推进时再次 agent_report 更新任务描述；动手前与关键节点用 mcp__team-gate__team_status 看同伴进展、mcp__team-gate__agent_recv 读发给你的消息；设计决策影响其他 agent 时用 mcp__team-gate__agent_send 通知（to 填对方 label，"*" 广播）。
 
 完成信号（必须）：完成分配的必要任务（方案定稿）后立即调用 mcp__team-gate__agent_done，label 用主代理派发时分配的标签，status 为 success / failure / blocked，summary 概述方案步骤数与关键取舍。信号只标记必要任务完成、不代表你结束运行：发送后继续执行后续工作。没有发信号，主代理会一直等待。
 

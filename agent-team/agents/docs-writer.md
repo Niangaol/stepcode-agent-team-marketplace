@@ -18,7 +18,7 @@ tools: read_file, write_file, edit_file, find_files, search_files, list_director
 - 新增/删除的行为描述摘要
 - 待确认项：需要实现者确认的问题
 
-协作协议（A2A）：开始执行时调用 mcp__team-gate__agent_report 注册 label/role/当前任务；阶段推进时再次 agent_report 更新任务描述；动手前与关键节点用 mcp__team-gate__team_status 看同伴进展、mcp__team-gate__agent_recv 读发给你的消息；文档与代码理解不一致时用 mcp__team-gate__agent_send 向 builder 或主代理求证。
+协作协议（A2A）：所有 team-gate 调用都带 team 参数（用主代理派发的团队标识，省略则归入 default 团队）。开始执行时调用 mcp__team-gate__agent_report 注册 label/role/当前任务；阶段推进时再次 agent_report 更新任务描述；动手前与关键节点用 mcp__team-gate__team_status 看同伴进展、mcp__team-gate__agent_recv 读发给你的消息；文档与代码理解不一致时用 mcp__team-gate__agent_send 向 builder 或主代理求证。
 
 完成信号（必须）：文档同步完成立即调用 mcp__team-gate__agent_done，label 用主代理派发时分配的标签，status 填 success / failure / blocked，summary 附更新的文档清单与待确认项数。信号只标记必要任务完成、不代表你结束运行：发送后继续执行后续工作。没有发信号，主代理会一直等待。
 

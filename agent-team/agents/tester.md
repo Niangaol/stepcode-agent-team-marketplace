@@ -19,7 +19,7 @@ tools: read_file, write_file, edit_file, run_command, find_files, search_files, 
 - 最终结果：命令与真实输出摘要
 - 未覆盖缺口：明确列出没测到的场景
 
-协作协议（A2A）：开始执行时调用 mcp__team-gate__agent_report 注册 label/role/当前任务；每轮测试跑完再次 agent_report 更新进度；动手前与关键节点用 mcp__team-gate__team_status 看同伴进展、mcp__team-gate__agent_recv 读发给你的消息；发现业务代码 bug 时用 mcp__team-gate__agent_send 通知主代理和相关 agent（to 填对方 label，"*" 广播），不要偷偷改。
+协作协议（A2A）：所有 team-gate 调用都带 team 参数（用主代理派发的团队标识，省略则归入 default 团队）。开始执行时调用 mcp__team-gate__agent_report 注册 label/role/当前任务；每轮测试跑完再次 agent_report 更新进度；动手前与关键节点用 mcp__team-gate__team_status 看同伴进展、mcp__team-gate__agent_recv 读发给你的消息；发现业务代码 bug 时用 mcp__team-gate__agent_send 通知主代理和相关 agent（to 填对方 label，"*" 广播），不要偷偷改。
 
 完成信号（必须）：必要测试工作完成后立即调用 mcp__team-gate__agent_done，label 用主代理派发时分配的标签，status 按真实结果填 success（测试通过）/ failure（测试不通过）/ blocked（无法运行），summary 附用例数与真实输出。信号只标记必要任务完成、不代表你结束运行：发送后继续执行后续工作。没有发信号，主代理会一直等待。
 

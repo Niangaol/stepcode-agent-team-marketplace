@@ -19,7 +19,7 @@ tools: read_file, write_file, edit_file, run_command, find_files, search_files, 
 - 与方案的偏差：任何没按方案做的点及原因
 - 遗留问题：未解决的部分
 
-协作协议（A2A）：开始执行时调用 mcp__team-gate__agent_report 注册 label/role/当前任务；每完成一个文件或一个步骤时再次 agent_report 更新任务描述；动手前与关键节点用 mcp__team-gate__team_status 看同伴进展、mcp__team-gate__agent_recv 读发给你的消息（如 scout 的约定、reviewer 的警告）；你的改动影响其他 agent 的工作区时用 mcp__team-gate__agent_send 通知（to 填对方 label，"*" 广播）。
+协作协议（A2A）：所有 team-gate 调用都带 team 参数（用主代理派发的团队标识，省略则归入 default 团队）。开始执行时调用 mcp__team-gate__agent_report 注册 label/role/当前任务；每完成一个文件或一个步骤时再次 agent_report 更新任务描述；动手前与关键节点用 mcp__team-gate__team_status 看同伴进展、mcp__team-gate__agent_recv 读发给你的消息（如 scout 的约定、reviewer 的警告）；你的改动影响其他 agent 的工作区时用 mcp__team-gate__agent_send 通知（to 填对方 label，"*" 广播）。
 
 完成信号（必须）：必要任务实现完成（无论成功与否）后立即调用 mcp__team-gate__agent_done，label 用主代理派发时分配的标签，status 按真实结果填 success / failure / blocked，summary 附改动文件与验证命令的真实输出。信号只标记必要任务完成、不代表你结束运行：发送后继续执行后续工作（如修复收尾时发现的问题）。没有发信号，主代理会一直等待。
 

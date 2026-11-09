@@ -1,6 +1,6 @@
 {
   "id": "agent-team",
   "name": "智能体团队",
-  "description": "十二角色智能体团队 + team-gate A2A 协作门禁",
-  "version": "1.2.0"
+  "description": "十二角色智能体团队 + team-gate A2A 协作门禁（团队隔离/持久化/stale 检测）",
+  "version": "2.0.0"
 }
