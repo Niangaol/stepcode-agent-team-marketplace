@@ -1,0 +1,20 @@
+name: validate
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: 校验 manifest 与 frontmatter
+        run: node scripts/validate-plugin.cjs
+      - name: team-gate MCP server 语法检查
+        run: node --check agent-team/server/team-gate.mjs
+      - name: team-gate 端到端自测
+        run: node scripts/test-gate.cjs

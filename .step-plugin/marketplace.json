@@ -1,0 +1,7 @@
+{
+  "name": "agent-team-marketplace",
+  "description": "智能体团队（agent-team）：十二角色编程团队 + team-gate A2A 协作门禁，适用于 Step Code。",
+  "plugins": [
+    { "name": "agent-team", "description": "十二角色智能体团队：需求/调研/调试/设计/实现/测试/审查/安全/性能/界面/文档/交付，含 team_wait/agent_done/agent_report/team_status/agent_send/agent_recv 六个协作工具。", "source": "./agent-team" }
+  ]
+}
